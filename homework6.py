@@ -14,13 +14,17 @@
 #Задача 32: Определить индексы элементов массива (списка), значения которых принадлежат заданному диапазону 
 #(т.е. не меньше заданного минимума и не больше заданного максимума)
 
-max_index = int(input("Введите верхнюю границу"))
-min_index = int(input("Введите нижнюю границу"))
+# max_index = int(input("Введите верхнюю границу"))
+# min_index = int(input("Введите нижнюю границу"))
 
-list = [2, 3, -9, 0, 16, 22, 47, 18, 54, -2, 0, 1]
+# list = [2, 3, -9, 0, 16, 22, 47, 18, 54, -2, 0, 1]
 
-for element in range(len(list)):
-    if min_index <= list[element] <= max_index:
-        print(element)
+# for element in range(len(list)):
+#     if min_index <= list[element] <= max_index:
+#         print(element)
+
+a = '@'
+b = '.'
+print(a and b)
 
 
