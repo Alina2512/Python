@@ -1,50 +1,72 @@
+close_phone_book = False
 
-path = 'phonebook.txt'
+path = "PhoneBook.txt"
 
-def create_open_file():
-    data = open(path, 'a', encoding = 'UTF-B')
-    data.close
+def scan(path):
+    data = open(path, 'r')
+    for i in data:
+        print(i)
 
-#def close_file():
-#    data = 
+def change(path):
+    file = open(path, 'r')
+    data = input("Add data for finding: ")
+    new_data = input("Add new data: ")
+    lines = []
+    for line in file:
+        if data in line.split(" "):
+            line = line.replace(data, new_data)
+        lines.append(line)
+    file.close()
+    file = open(path, 'w')
+    file.write("".join(lines))
+    file.close()
 
-def adding_into_file():
-    data = open(path, 'a', encoding='UTF-8')
-    name = input("Введите имя: ").capitalize()
-    middle_name = input("Введите отчество: ").capitalize()
-    surname = input("Введите фамилию: ").capitalize()
-    phone = input("Введите номер телефона: ")
-    data.write(f"{name} {middle_name} {surname} {phone}")
-    data.close
 
-def reading_file():
-    data = open(path, 'r', encoding='UTF-8')
-    print(data.read())
+def remove(path):
+    file = open(path, 'r')
+    data = input("Add data for removing: ")
+    lines = []
+    for line in file:
+        if data not in line.split(" "):
+            lines.append(line)
+    file.close()
+    file = open(path, 'w')
+    file.write("".join(lines))
+    file.close()
+
+
+def find(path):
+    file = open(path, 'r')
+    data = input("Add data for finding: ")
+    for line in file:
+        if data in line.split(" "):
+            print(line)
+    file.close()
+
+
+def add(path):
+    data = open(path, 'a')
+    name = input("Add first name: ")
+    middle_name = input("Add middle name: ")
+    surname = input("Add surname: ")
+    phone_number = int(input("Add phone number: "))
+    data.writelines(f"{name} {middle_name} {surname} {phone_number} \n")
     data.close()
 
-def finding_contact_file():
-    data = open(path, 'r', encoding='UTF-8')
-    finding_contact = input("Введите искомые параметры: ")
-    in_finding_text = data.readlines()
-    dict_contacts = {}
-    for i, j in enumerate(in_finding_text, 1):
-        j = j.strip()
-        dict_contacts = {'name': in_finding_text[0], 'middle_name': in_finding_text[1], 'surname': in_finding_text[2], 'phone': in_finding_text[3] }
-    for i in in_finding_text:
-        if i == finding_contact:
-            print(dict_contacts['name'])
+def exit(path):
+    global close_phone_book
+    close_phone_book = True
 
+commands_dict = {1: scan, 2: change, 3: remove, 4: find, 5: add, 6: exit}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+while not close_phone_book:
+    print("Choose action: ")
+    print("1 - Scan contacts")
+    print("2 - Change contacts")
+    print("3 - Remove contacts")
+    print("4 - Find contacts")
+    print("5 - Add contacts")
+    print("6: Exit")
+    command = commands_dict[int(input("Add action: "))]
+    if command:
+        command(path)
